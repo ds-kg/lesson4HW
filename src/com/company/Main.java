@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Main {
 
-    public static int bossHealth = 1000;
+    public static int bossHealth = 700;
     public static int bossDamage = 50;
     public static String bossDefenceType = " ";
     public static int[] heroesHealth = {280, 260, 240};
@@ -20,7 +20,6 @@ public class Main {
         while (!isFinished()) {
             round();
         }
-
     }
 
     public static void round() {
@@ -30,12 +29,9 @@ public class Main {
         fightInfo();
         doctorTreading();
         bossHitDoc();
-
+        doctorDeath();
 
     }
-
-
-
 
     public static void changeBossDefence() {
         Random random1 = new Random();
@@ -61,8 +57,6 @@ public class Main {
                 if (heroesHealth[i] - bossDamage < 0) {
                     heroesHealth[i] = 0;
                 } else {
-
-
                     heroesHealth[i] = heroesHealth[i] - bossDamage;
                 }
             }
@@ -72,13 +66,20 @@ public class Main {
     public static void bossHitDoc(){
         for (int i = 0; i < doctorHealth; i++) {
             doctorHealth = doctorHealth - bossDamage;
+
         }
     }
-
+    
     public static void doctorTreading() {
         for (int i = 0; i < heroesHealth.length; i++) {
             heroesHealth[i] = heroesHealth[i] + doctorTread;
         }
+    }
+    public static void doctorDeath() {
+        if (doctorHealth == 0) {
+            doctorTread = 0;
+        }
+
     }
 
 
@@ -98,7 +99,6 @@ public class Main {
                     if (bossHealth - heroesDamage[i] < 0) {
                         bossHealth = 0;
                     } else {
-
                         bossHealth = bossHealth - heroesDamage[i];
                     }
                 }
@@ -117,6 +117,4 @@ public class Main {
         System.out.println("Doctor`s Tread: " + doctorTread);
         System.out.println("__________________________");
     }
-
-
 }
